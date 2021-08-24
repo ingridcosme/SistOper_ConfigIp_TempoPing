@@ -48,12 +48,11 @@ public class RedesController {
 				while(linha != null) {  //Percorre todo o buffer				
 					if(linha.contains("Adaptador")) {
 						adaptador = linha;
-					} else {
-						if(linha.contains("IPv4")) {
-							String [] ipv4 = linha.split(":");  //Recebe a linha com o IPv4
-							System.out.println(adaptador + ipv4[1]);
-						}
+					} else if(linha.contains("IPv4")) {
+						String [] ipv4 = linha.split(":");  //Recebe a linha com o IPv4
+						System.out.println(adaptador + ipv4[1]);
 					}
+					
 					linha = buffer.readLine();
 				}	
 				
@@ -78,11 +77,10 @@ public class RedesController {
 				while(linha != null) {  //Percorre todo o buffer				
 					if(linha.contains("flag")) {
 						adaptador = linha.split(":");  //Recebe a linha com o nome da Rede
-					} else {
-						if(linha.contains("inet")) {  
-							String [] ipv4 = linha.split(" ");  //Recebe a linha com o IPv4
-							System.out.println(adaptador[0] + ipv4[1]);
-						}
+					} else if(linha.contains("inet")) {  
+						String [] ipv4 = linha.split("inet");  //Recebe a linha com o IPv4
+						ipv4 = ipv4[1].split("netmask");
+						System.out.println(adaptador[0] + ipv4[0]);
 					}
 					linha = buffer.readLine();
 				}	
@@ -133,7 +131,7 @@ public class RedesController {
 		
 		} else if(sistema.contains("Linux")) {  //Se Linux
 			try {
-				p = Runtime.getRuntime().exec("PING -4 -c 10 www.google.com.br");  //Recebe dados do processo
+				p = Runtime.getRuntime().exec("ping -4 -c 10 www.google.com.br");  //Recebe dados do processo
 				
 				InputStream fluxo = p.getInputStream();  //Transformando os dados em um fluxo de bits
 				InputStreamReader leitor = new InputStreamReader(fluxo);  //Lê o fluxo e converte para string
