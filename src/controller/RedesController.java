@@ -77,8 +77,8 @@ public class RedesController {
 				while(linha != null) {  //Percorre todo o buffer				
 					if(linha.contains("flag")) {
 						adaptador = linha.split(":");  //Recebe a linha com o nome da Rede
-					} else if(linha.contains("inet")) {  
-						String [] ipv4 = linha.split("inet");  //Recebe a linha com o IPv4
+					} else if(linha.contains("inet ")) {  
+						String [] ipv4 = linha.split("inet ");  //Recebe a linha com o IPv4
 						ipv4 = ipv4[1].split("netmask");
 						System.out.println(adaptador[0] + ipv4[0]);
 					}
